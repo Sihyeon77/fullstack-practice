@@ -3,11 +3,13 @@ package io.getarrays.server.service.implementation;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Collection;
+import java.util.Random;
 
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.getarrays.server.enumeration.Status;
 import io.getarrays.server.model.Server;
@@ -80,7 +82,12 @@ public class ServerServiecImpl implements ServerService {
     }
 
     private String setServerImageUrl() {
-        return null;
+        String[] imageNames = {
+                "....../resouces/images/server.png",
+                "....../resources/images/server-icon-vector-sign-symbol-isolated-white-background-server-icon-vector-isolated-white-background-your-web-133761922.jpg"
+        };
+        return ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/server/image" + imageNames[new Random().nextInt(2)]).toUriString();
     }
 
 }
